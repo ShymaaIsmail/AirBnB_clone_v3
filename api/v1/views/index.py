@@ -28,11 +28,3 @@ def stats():
         states=storage.count(State),
         users=storage.count(User),
     )
-
-
-@app_views.route('/nop', strict_slashes=False)
-def no():
-    """returns not found"""
-    response = jsonify(error="Not found")
-    response.status_code = 404
-    return response
