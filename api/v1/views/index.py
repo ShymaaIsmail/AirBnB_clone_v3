@@ -29,6 +29,7 @@ def stats():
         users=storage.count(User),
     )
 
+
 @app_views.route('/nop', strict_slashes=False)
 def no():
     """returns not found"""
