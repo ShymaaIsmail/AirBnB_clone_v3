@@ -62,7 +62,7 @@ def put_state(state_id=None):
         existed_state = storage.get(State, state_id)
         if existed_state is not None:
             for key, value in request_body.items():
-                if key not in ['id', 'created_at', 'updated_at']:
+                if key not in ['id', 'created_at', 'updated_at', 'cities']:
                     setattr(existed_state, key, value)
             existed_state.save()
             return jsonify(existed_state.to_dict()), 200
