@@ -15,7 +15,7 @@ def teardown(Exception):
     storage.close()
 
 
-@app_views.route('/nop', strict_slashes=False)
+@app.route('/nop', strict_slashes=False)
 def no():
     """returns not found"""
     response = jsonify(error="Not found")
