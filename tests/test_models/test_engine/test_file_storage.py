@@ -274,14 +274,14 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(type(storage), FileStorage)
 
     def test_save_and_get(self):
-        # Test saving and retrieving an object
+        """ Test saving and retrieving an object"""
         obj_id = "1"
         obj = State(**{'id': obj_id, 'name': 'california'})
         obj.save()
         self.assertEqual(storage.get(State, obj_id), obj)
 
     def test_count(self):
-        # Test counting objects
+        """ Test counting objects"""
         obj1 = State(**{'name': 'new york'})
         obj2 = State(**{'name': 'california'})
         obj3 = User(**{'first_name': 'firstname',
