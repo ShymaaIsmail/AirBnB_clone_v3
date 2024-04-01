@@ -71,7 +71,7 @@ def put_state(state_id=None):
                 if key not in ['id', 'created_at', 'updated_at']:
                     setattr(existed_state, key, value)
             existed_state.save()
-            return jsonify(existed_state.to_dict()), 201
+            return jsonify(existed_state.to_dict()), 200
         else:
             abort(404)
     else:
