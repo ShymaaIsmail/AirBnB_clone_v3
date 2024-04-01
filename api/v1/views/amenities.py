@@ -42,7 +42,7 @@ def post_amenity():
     """post amenity to storage"""
     if request.is_json:
         request_body = request.get_json()
-        if (request_body["name"] is not None):
+        if "name" in request_body:
             new_amenity = Amenity(**request_body)
             storage.new(new_amenity)
             storage.save()

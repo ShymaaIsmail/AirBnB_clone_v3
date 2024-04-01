@@ -42,7 +42,7 @@ def post_state():
     """post state to storage"""
     if request.is_json:
         request_body = request.get_json()
-        if (request_body["name"] is not None):
+        if "name" in request_body:
             new_state = State(**request_body)
             storage.new(new_state)
             storage.save()
