@@ -32,7 +32,7 @@ def delete_state(state_id=None):
     if state is not None:
         storage.delete(state)
         storage.save()
-        return jsonify()
+        return jsonify({}), 200
     else:
         abort(404)
 
@@ -59,12 +59,12 @@ def put_state(state_id=None):
     """put state to storage"""
     if state_id is not None and request.is_json:
         request_body = request.get_json()
-        new_state = State(**request_body)
         existed_state = storage.get(State, state_id)
         if existed_state is not None:
-            if new_state.name is not None:
-                existed_state.name = new_state.name
-                existed_state.save()
+            for key, value in request_body.items():
+                if key not in ['id', 'created_at', 'updated_at']:
+                    setattr(existed_state, key, value)
+            existed_state.save()
             return jsonify(new_state.to_dict()), 201
         else:
             abort(404)
