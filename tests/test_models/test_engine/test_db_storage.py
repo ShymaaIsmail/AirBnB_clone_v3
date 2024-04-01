@@ -261,6 +261,27 @@ class TestDBStorageModel(unittest.TestCase):
         self.assertEqual(storage.count(User), 1)
         self.assertEqual(storage.count(), 3)
 
+    def test_get_db(self):
+        """ Tests method for obtaining an instance db storage"""
+        dic = {"name": "Calabar"}
+        instance = State(**dic)
+        storage.new(instance)
+        storage.save()
+        get_instance = storage.get(State, instance.id)
+        self.assertEqual(get_instance, instance)
+
+    def test_count(self):
+        """ Tests count method db storage """
+        dic = {"name": "Lagos"}
+        state = State(**dic)
+        storage.new(state)
+        dic = {"name": "Abuja", "state_id": state.id}
+        city = City(**dic)
+        storage.new(city)
+        storage.save()
+        c = storage.count()
+        self.assertEqual(len(storage.all()), c)
+
 
 if __name__ == '__main__':
     unittest.main()
