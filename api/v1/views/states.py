@@ -57,7 +57,7 @@ def post_state():
                  strict_slashes=False)
 def put_state(state_id=None):
     """put state to storage"""
-    if state_id is not None and request.is_json:
+    if request.is_json:
         request_body = request.get_json()
         existed_state = storage.get(State, state_id)
         if existed_state is not None:

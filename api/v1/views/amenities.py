@@ -57,7 +57,7 @@ def post_amenity():
                  strict_slashes=False)
 def put_amenity(amenity_id=None):
     """put amenity to storage"""
-    if amenity_id is not None and request.is_json:
+    if request.is_json:
         request_body = request.get_json()
         existed_amenity = storage.get(Amenity, amenity_id)
         if existed_amenity is not None:
