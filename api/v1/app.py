@@ -15,12 +15,16 @@ def teardown(Exception):
     storage.close()
 
 
-@app.route('/nop', strict_slashes=False)
-def no():
-    """returns not found"""
-    response = jsonify(error="Not found")
-    response.status_code = 404
-    return response
+@app.route('/nop')
+def nop():
+    """nop request"""
+    pass
+
+
+@app.errorhandler(404)
+def not_found(error):
+    """not found handler"""
+    return jsonify(error="Not found"), 404
 
 
 if __name__ == '__main__':
