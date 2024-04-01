@@ -2,24 +2,24 @@
 """ Module for testing file storage"""
 import inspect
 import unittest
+import os
 from models.base_model import BaseModel
 from models import storage
 from models.engine.file_storage import FileStorage
-import os
-
 from models.state import State
 from models.user import User
 
-@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'file',
-                 "file storage not selected")
-class test_fileStorage(unittest.TestCase):
+
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'file', "no")
+class TestFileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
     def test_doc(self):
         """Test if module and class have docs"""
-        self.assertIsNotNone(FileStorage.__doc__, 'no docs for DBStorage Class')
+        self.assertIsNotNone(FileStorage.__doc__, 'no')
         self.assertIsNotNone(FileStorage.__doc__, 'no docs for module')
-        for name, method in inspect.getmembers(FileStorage, inspect.isfunction):
+        for name, method in inspect.getmembers(FileStorage,
+                                               inspect.isfunction):
             self.assertIsNotNone(method.__doc__, f"{name} has no docs")
 
     def setUp(self):
@@ -34,7 +34,7 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except:
+        except FileNotFoundError:
             pass
 
     def test_obj_list_empty(self):
@@ -125,12 +125,10 @@ class test_fileStorage(unittest.TestCase):
     def test_storage_var_created(self):
         """ FileStorage object storage created """
         from models.engine.file_storage import FileStorage
-        print(type(storage))
         self.assertEqual(type(storage), FileStorage)
 
-
     def test_save_and_get(self):
-    # Test saving and retrieving an object
+        # Test saving and retrieving an object
         obj_id = "1"
         obj = State(**{'id': obj_id, 'name': 'california'})
         obj.save()
@@ -141,9 +139,9 @@ class test_fileStorage(unittest.TestCase):
         obj1 = State(**{'name': 'new york'})
         obj2 = State(**{'name': 'california'})
         obj3 = User(**{'first_name': 'firstname',
-                            'last_name': 'lasttt',
-                            'email': 'firstname@lasttt.com',
-                            'password': 'abcd'})
+                       'last_name': 'lasttt',
+                       'email': 'firstname@lasttt.com',
+                       'password': 'abcd'})
         obj1.save()
         obj2.save()
         obj3.save()
@@ -151,9 +149,7 @@ class test_fileStorage(unittest.TestCase):
         self.assertEqual(storage.count(State), 2)
         self.assertEqual(storage.count(User), 1)
         self.assertEqual(storage.count(), 3)
-        
 
 
 if __name__ == '__main__':
     unittest.main()
-

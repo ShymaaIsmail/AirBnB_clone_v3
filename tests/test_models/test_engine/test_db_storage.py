@@ -71,8 +71,6 @@ class TestDBStorageModel(unittest.TestCase):
         self.assertIn('test', result)
         self.assertIn('last', result)
 
-    
-
     def test_delete(self):
         """ Object is correctly deleted from database """
         new = User(
@@ -124,13 +122,14 @@ class TestDBStorageModel(unittest.TestCase):
             last_name='last'
         )
         self.cursor.execute('SELECT * FROM users WHERE id="{}"'.format(new.id))
-        result =self.cursor.fetchone()
+        result = self.cursor.fetchone()
         self.cursor.execute('SELECT COUNT(*) FROM users;')
         old_cnt = self.cursor.fetchone()[0]
         self.assertTrue(result is None)
         self.assertFalse(new in storage.all().values())
         new.save()
-        self.cursor_concurrent.execute('SELECT * FROM users WHERE id="{}"'.format(new.id))
+        self.cursor_concurrent.execute('SELECT * FROM users WHERE id="{}"'.
+                                       format(new.id))
         result = self.cursor_concurrent.fetchone()
         self.cursor_concurrent.execute('SELECT COUNT(*) FROM users;')
         new_cnt = self.cursor_concurrent.fetchone()[0]
@@ -144,7 +143,7 @@ class TestDBStorageModel(unittest.TestCase):
         self.assertEqual(type(storage), DBStorage)
 
     def test_new_and_save(self):
-        """testing  the new and save methods"""
+        """testing the new and save methods"""
         new_user = User(**{'first_name': 'firstname',
                            'last_name': 'lasttt',
                            'email': 'firstname@lasttt.com',
@@ -157,9 +156,8 @@ class TestDBStorageModel(unittest.TestCase):
         new_count = self.cursor_concurrent.fetchall()
         self.assertEqual(new_count[0][0], old_count[0][0] + 1)
 
-    
     def test_save_and_get(self):
-    # Test saving and retrieving an object
+        # Test saving and retrieving an object
         obj_id = "1"
         obj = State(**{'id': obj_id, 'name': 'california'})
         obj.save()
@@ -170,9 +168,9 @@ class TestDBStorageModel(unittest.TestCase):
         obj1 = State(**{'name': 'new york'})
         obj2 = State(**{'name': 'california'})
         obj3 = User(**{'first_name': 'firstname',
-                            'last_name': 'lasttt',
-                            'email': 'firstname@lasttt.com',
-                            'password': 'abcd'})
+                       'last_name': 'lasttt',
+                       'email': 'firstname@lasttt.com',
+                       'password': 'abcd'})
         obj1.save()
         obj2.save()
         obj3.save()
