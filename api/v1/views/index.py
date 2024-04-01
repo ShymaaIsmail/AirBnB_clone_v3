@@ -7,7 +7,7 @@ from . import app_views
 @app_views.route('/status', strict_slashes=False)
 def status():
     """returns status"""
-    return jsonify({"status": "ok"})
+    return jsonify({"status": "OK"})
 
 
 @app_views.route('/stats', strict_slashes=False)
