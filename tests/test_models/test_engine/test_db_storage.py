@@ -259,6 +259,7 @@ class TestDBStorageModel(unittest.TestCase):
 
         self.assertEqual(storage.count(State), 2)
         self.assertEqual(storage.count(User), 1)
+        self.assertEqual(storage.count(), 3)
 
 
 if __name__ == '__main__':
