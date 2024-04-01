@@ -10,6 +10,7 @@ from models.user import User
 from models.place import Place
 from . import app_views
 
+
 @app_views.route('/status', strict_slashes=False)
 def status():
     """returns status"""
@@ -20,10 +21,10 @@ def status():
 def stats():
     """returns stats"""
     return jsonify(
-    amenities = storage.count(Amenity), 
-    cities = storage.count(City),
-    places = storage.count(Place), 
-    reviews = storage.count(Review), 
-    states = storage.count(State), 
-    users = storage.count(User)
+        amenities=storage.count(Amenity),
+        cities=storage.count(City),
+        places=storage.count(Place),
+        reviews=storage.count(Review),
+        states=storage.count(State),
+        users=storage.count(User),
     )
