@@ -55,6 +55,17 @@ def post_state():
 
 @app_views.route('/states/<state_id>', methods=['PUT'],
                  strict_slashes=False)
-def put_state():
+def put_state(state_id=None):
     """put state to storage"""
-    pass
+    if state_id is not None and request.is_json:
+        request_body = request.get_json()
+        new_state = State(**request_body)
+        existed_state = storage.get(State, state_id)
+        if existed_state is not None:
+            existed_state.name = new_state.name
+            existed_state.save()
+            return jsonify(new_state.to_dict()), 201
+        else:
+            abort(404)
+    else:
+        abort(400, "Not a JSON")
