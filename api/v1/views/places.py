@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""Cities Module"""
-
-# api/v1/views/places.py
+"""Places Module"""
 
 from flask import abort, jsonify, request
 from models import storage
