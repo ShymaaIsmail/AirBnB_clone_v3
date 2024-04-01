@@ -42,8 +42,6 @@ def post_user():
     """post user to storage"""
     if request.is_json:
         request_body = request.get_json()
-        if "name" not in request_body:
-            abort(400, "Missing name")
         if "email" not in request_body:
             abort(400, "Missing email")
         if "password" not in request_body:
