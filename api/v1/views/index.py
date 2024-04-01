@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Index module"""
-from flask import jsonify
+from flask import jsonify, make_response
 from models import storage
 from models.amenity import Amenity
 from models.city import City
@@ -28,3 +28,10 @@ def stats():
         states=storage.count(State),
         users=storage.count(User),
     )
+
+@app_views.route('/nop', strict_slashes=False)
+def no():
+    """returns not found"""
+    response = jsonify(error="Not found")
+    response.status_code = 404
+    return response
