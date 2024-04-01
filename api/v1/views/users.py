@@ -40,18 +40,17 @@ def delete_user(user_id=None):
 @app_views.route('/users', methods=['POST'], strict_slashes=False)
 def post_user():
     """post user to storage"""
-    if request.is_json:
-        request_body = request.get_json()
-        if "email" not in request_body:
-            abort(400, "Missing email")
-        if "password" not in request_body:
-            abort(400, "Missing password")
-        new_user = User(**request_body)
-        storage.new(new_user)
-        storage.save()
-        return jsonify(new_user.to_dict()), 201
-    else:
+    if not request.is_json:
         abort(400, "Not a JSON")
+    request_body = request.get_json()
+    if "email" not in request_body:
+        abort(400, "Missing email")
+    if "password" not in request_body:
+        abort(400, "Missing password")
+    new_user = User(**request_body)
+    storage.new(new_user)
+    storage.save()
+    return jsonify(new_user.to_dict()), 201
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'],
