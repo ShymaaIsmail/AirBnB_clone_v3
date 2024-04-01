@@ -62,8 +62,9 @@ def put_state(state_id=None):
         new_state = State(**request_body)
         existed_state = storage.get(State, state_id)
         if existed_state is not None:
-            existed_state.name = new_state.name
-            existed_state.save()
+            if new_state.name is not None:
+                existed_state.name = new_state.name
+                existed_state.save()
             return jsonify(new_state.to_dict()), 201
         else:
             abort(404)
