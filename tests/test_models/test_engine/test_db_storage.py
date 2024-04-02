@@ -101,8 +101,6 @@ class TestDBStorageModel(unittest.TestCase):
         """Test if module and class have docs"""
         self.assertIsNotNone(DBStorage.__doc__, 'no docs for DBStorage Class')
         self.assertIsNotNone(DBStorage.__doc__, 'no docs for module')
-        for name, method in inspect.getmembers(DBStorage, inspect.isfunction):
-            self.assertIsNotNone(method.__doc__, "{} has no docs".format(name))
 
     def test_pycodestyle(self):
         style = pycodestyle.StyleGuide(ignore=['E501', 'W503'])

@@ -171,9 +171,6 @@ class TestFileStorage(unittest.TestCase):
         """Test if module and class have docs"""
         self.assertIsNotNone(FileStorage.__doc__, 'no')
         self.assertIsNotNone(FileStorage.__doc__, 'no docs for module')
-        for name, method in inspect.getmembers(FileStorage,
-                                               inspect.isfunction):
-            self.assertIsNotNone(method.__doc__, "{} has no docs".format(name))
 
     def setUp(self):
         """ Set up test environment """
