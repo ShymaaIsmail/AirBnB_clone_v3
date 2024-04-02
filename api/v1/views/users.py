@@ -66,6 +66,6 @@ def put_user(user_id=None):
             if key not in ['id', 'email', 'created_at', 'updated_at']:
                 setattr(existed_user, key, value)
         existed_user.save()
-        return jsonify(id=existed_user.id, email=existed_user.email), 200
+        return jsonify(existed_user), 200
     else:
         abort(404)
