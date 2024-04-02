@@ -38,3 +38,4 @@ class User(BaseModel, Base):
         hash_object.update(self.password.encode())
         # Get the hexadecimal representation of the hash
         sha256_hash = hash_object.hexdigest()
+        self.password = sha256_hash
