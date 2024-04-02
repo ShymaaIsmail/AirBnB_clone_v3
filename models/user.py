@@ -33,9 +33,9 @@ class User(BaseModel, Base):
     def secure_password(self):
         """set password hashed as MDF5 value"""
         # Create a SHA-256 hash object
-        hash_object = hashlib.sha256()
+        hash_object = hashlib.md5()
         # Update the hash object with the string's bytes
         hash_object.update(self.password.encode())
         # Get the hexadecimal representation of the hash
-        sha256_hash = hash_object.hexdigest()
+        sha256_hash = hash_object.digest()
         self.password = sha256_hash
