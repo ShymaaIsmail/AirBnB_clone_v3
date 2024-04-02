@@ -19,7 +19,7 @@ def get_user(user_id=None):
     """returns user by user_id"""
     user = storage.get(User, user_id)
     if user is not None:
-        return jsonify(user.to_dict())
+        return jsonify(id=user.id, email=user.email), 200
     else:
         abort(404)
 
@@ -66,6 +66,6 @@ def put_user(user_id=None):
             if key not in ['id', 'email', 'created_at', 'updated_at']:
                 setattr(existed_user, key, value)
         existed_user.save()
-        return jsonify(existed_user), 200
+        return jsonify(existed_user.to_dict()), 200
     else:
         abort(404)
