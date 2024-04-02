@@ -28,7 +28,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsNotNone(FileStorage.__doc__, 'no docs for module')
         for name, method in inspect.getmembers(FileStorage,
                                                inspect.isfunction):
-            self.assertIsNotNone(method.__doc__, f"{name} has no docs")
+            self.assertIsNotNone(method.__doc__, "{} has no docs".format(name))
 
     def setUp(self):
         """ Set up test environment """
@@ -173,7 +173,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsNotNone(FileStorage.__doc__, 'no docs for module')
         for name, method in inspect.getmembers(FileStorage,
                                                inspect.isfunction):
-            self.assertIsNotNone(method.__doc__, f"{name} has no docs")
+            self.assertIsNotNone(method.__doc__, "{} has no docs".format(name))
 
     def setUp(self):
         """ Set up test environment """
