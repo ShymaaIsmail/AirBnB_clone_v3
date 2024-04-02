@@ -35,7 +35,7 @@ class User(BaseModel, Base):
         # Create a SHA-256 hash object
         hash_object = hashlib.md5()
         # Update the hash object with the string's bytes
-        hash_object.update(self.password.encode())
+        hash_object.update(self.password)
         # Get the hexadecimal representation of the hash
         sha256_hash = hash_object.digest()
         self.password = sha256_hash
