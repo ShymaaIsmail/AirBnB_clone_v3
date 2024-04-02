@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """ holds class User"""
-import models
-from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+import hashlib
+import models
+from models.base_model import BaseModel, Base
 
 
 class User(BaseModel, Base):
@@ -27,3 +28,13 @@ class User(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """initializes user"""
         super().__init__(*args, **kwargs)
+        self.secure_password()
+
+    def secure_password(self):
+        """set password hashed as MDF5 value"""
+        # Create a SHA-256 hash object
+        hash_object = hashlib.sha256()
+        # Update the hash object with the string's bytes
+        hash_object.update(self.password.encode())
+        # Get the hexadecimal representation of the hash
+        sha256_hash = hash_object.hexdigest()
